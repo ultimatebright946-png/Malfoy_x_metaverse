@@ -28,11 +28,43 @@ fs.mkdirSync(AUTH_DIR, { recursive: true });
 const STATE = { qr: null, connected: false };
 require('./lib/server').start({ routes: app => {
   app.get('/qr', async (q, r) => {
-    if (!process.env.QR_KEY || q.query.key !== process.env.QR_KEY) return r.status(403).send('Forbidden');
-    if (STATE.connected) return r.send('Connected');
-    if (!STATE.qr) return r.send('<meta http-equiv="refresh" content="3">Waiting for QR...');
-    const img = await QR.toDataURL(STATE.qr);
-    r.send('<meta http-equiv="refresh" content="20"><body style="background:#111;color:#fff;text-align:center;font-family:sans-serif"><h3>WhatsApp > Linked devices > Link a device</h3><img src="' + img + '" width="320">');
+    const expected = String(process.env.QR_KEY || '').trim();
+    const supplied = String(q.query.key || '').trim();
+
+    if (!expected) {
+      return r.status(503).send('QR_KEY is missing from Render Environment.');
+    }
+
+    if (!supplied || supplied !== expected) {
+      return r.status(403).send('Invalid QR access key. Check your URL and Render Environment.');
+    }
+
+    if (STATE.connected) {
+      return r.send('MALFOY WhatsApp is already connected.');
+    }
+
+    if (!STATE.qr) {
+      return r.send(
+        '<meta http-equiv="refresh" content="3">' +
+        '<body style="background:#111;color:white;text-align:center;font-family:sans-serif">' +
+        '<h2>⚔️ MALFOY</h2><p>Waiting for WhatsApp QR...</p></body>'
+      );
+    }
+
+    try {
+      const img = await QR.toDataURL(STATE.qr);
+      return r.send(
+        '<meta http-equiv="refresh" content="20">' +
+        '<body style="background:#111;color:white;text-align:center;font-family:sans-serif;padding:20px">' +
+        '<h2>⚔️ MALFOY WHATSAPP LOGIN</h2>' +
+        '<p>WhatsApp → Linked devices → Link a device</p>' +
+        '<img src="' + img + '" style="width:320px;max-width:90%;background:white;padding:10px;border-radius:12px">' +
+        '</body>'
+      );
+    } catch (e) {
+      console.log('[QR ERROR]', e.message);
+      return r.status(500).send('Could not generate QR code.');
+    }
   });
 } });
 
