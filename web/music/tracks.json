@@ -1,0 +1,5 @@
+{ "tracks": [
+  { "id": "ashen-crossroads", "title": "Ashen Crossroads", "artist": "Malfoy (original, synthesized)", "mood": "calm", "file": "Ashen_Crossroads.mp3", "duration": 64 },
+  { "id": "fungal-lullaby", "title": "Fungal Lullaby", "artist": "Malfoy (original, synthesized)", "mood": "dreamy", "file": "Fungal_Lullaby.mp3", "duration": 64 },
+  { "id": "void-heart", "title": "Void Heart", "artist": "Malfoy (original, synthesized)", "mood": "tense", "file": "Void_Heart.mp3", "duration": 64 }
+] }

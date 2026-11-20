@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Malfoy</title>
+  <meta name="description" content="Malfoy: a dark-fantasy anime RPG. Build your character, awaken a path, fight bosses, collect cards, join a guild and climb the leaderboards.">
+  <meta name="theme-color" content="#080A0C">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23080A0C'/%3E%3Cpath d='M16 5l9 8-4 14h-10l-4-14z' fill='%2319D68A'/%3E%3C/svg%3E">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <canvas id="crows" aria-hidden="true"></canvas>
+  <div class="app">
+    <aside class="side" id="side" aria-label="Sections">
+      <a class="brand" href="#/"><span class="logo" aria-hidden="true"></span><span>Malfoy</span></a>
+      <nav id="nav" aria-label="Main"></nav>
+      <a class="grouplink" href="https://chat.whatsapp.com/DEzTmMDm4nxG2ZWIQ0Pvw5" target="_blank" rel="noopener noreferrer">Join the WhatsApp community</a>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+    <div class="col">
+      <header class="top">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open sections" aria-controls="side"><span></span><span></span><span></span></button>
+        <a class="brand-sm" href="#/">Malfoy</a>
+        <div class="top-actions"><button class="btn small quiet" id="installBtn" type="button" hidden>Install app</button><div id="who" class="who"></div></div>
+      </header>
+      <main id="view" tabindex="-1"></main>
+      <footer class="foot">Malfoy runs on WhatsApp and Discord. Send <code>.menu</code> or <code>/menu</code> to see every command. <a href="https://chat.whatsapp.com/DEzTmMDm4nxG2ZWIQ0Pvw5" target="_blank" rel="noopener noreferrer">Join the official group</a></footer>
+    </div>
+    <aside class="act" id="activity" aria-label="Activity"></aside>
+  </div>
+  <nav class="tabbar" id="tabbar" aria-label="Quick navigation"></nav>
+  <div id="player" class="miniplayer" hidden></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">This site needs JavaScript.</p></noscript>
+  <script src="/pwa.js" defer></script>
+  <script src="/game.js" defer></script>
+  <script src="/duel.js" defer></script>
+  <script src="/app.js" defer></script>
+  <script src="/art.js" defer></script>
+  <script src="/shell.js" defer></script>
+  <script src="/pages1.js" defer></script>
+  <script src="/pages2.js" defer></script>
+  <script src="/pages3.js" defer></script>
+  <script src="/console.js" defer></script>
+  <script src="/crows.js" defer></script>
+  <script src="/depth.js" defer></script>
+</body>
+</html>
