@@ -8,6 +8,5 @@ COPY package.json ./
 RUN npm install --omit=dev
 COPY . .
 # If the files were uploaded flat (lib_*.js), drop any stale folders left from an older upload so they cannot be loaded by mistake
-RUN if [ -f lib_db.js ]; then rm -rf lib commands web; fi
 ENV NODE_ENV=production
 CMD ["node", "index.js"]
