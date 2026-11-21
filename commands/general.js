@@ -16,10 +16,21 @@ async function sendPages(c, pages) {
   for (let i = 0; i < pages.length; i++) { try { await c.sock.sendMessage(c.jid, { text: pages[i] }, i === 0 ? { quoted: c.msg } : {}); } catch (e) { console.log('[menu] send failed', e && e.message); } }
 }
 reg.add(['menu', 'commands'], 'GENERAL', async c => {
-  const platform = c.platform || 'whatsapp', owner = !!(c.isOwner || (c.u && c.u.owner));
-  const r = MENU.buildMenu({ platform, u: c.u, name: (c.u && c.u.name) || (c.msg && c.msg.pushName) || '', isOwner: owner, section: c.args && c.args[0] });
+  const platform = c.platform || 'whatsapp';
+  const owner = !!(c.isOwner || (c.u && c.u.owner));
+
+  const r = MENU.buildMenu({
+    platform,
+    u: c.u,
+    name: (c.u && c.u.name) || (c.msg && c.msg.pushName) || '',
+    isOwner: owner,
+    section: c.args && c.args[0]
+  });
+
   if (!r.ok) return c.reply(r.pages[0]);
-  if (platform === 'whatsapp' && !(c.args && c.args[0])) {
+
+  return sendPages(c, r.pages);
+}, 'Show the command menu', { usage: 'menu [section]' });
     // optional banner image: used only if the asset exists, never a crash if it does not
     let img = null; try { img = M.local('menu'); } catch (e) {}
     if (img) {
