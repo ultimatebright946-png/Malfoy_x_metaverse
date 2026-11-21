@@ -43,7 +43,7 @@
   }
 
   // ---------- views ----------
-  var GROUP = 'https://chat.whatsapp.com/DEzTmMDm4nxG2ZWIQ0Pvw5';
+  var GROUP = 'https://chat.whatsapp.com/HA8kyTu1H4W3EdALEqXosX';
   function genderPrompt() {
     if (!state.me || state.me.genderSet) return;
     function pick(g) { api('/api/gender', { gender: g }).then(function (r) { if (r.ok) { state.me = r.me; renderWho(); toast('Saved. The bot will bring you the opposite gender in .sm'); route(); } else toast(r.msg || 'Could not save that.'); }); }
