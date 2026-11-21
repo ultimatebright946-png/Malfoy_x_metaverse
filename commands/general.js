@@ -31,16 +31,6 @@ reg.add(['menu', 'commands'], 'GENERAL', async c => {
 
   return sendPages(c, r.pages);
 }, 'Show the command menu', { usage: 'menu [section]' });
-    // optional banner image: used only if the asset exists, never a crash if it does not
-    let img = null; try { img = M.local('menu'); } catch (e) {}
-    if (img) {
-      // the picture carries only the header (WhatsApp captions are short); the sections follow as normal text
-      const i = r.pages[0].indexOf('┏━'), cap = i > 0 ? r.pages[0].slice(0, i).trim() : r.pages[0].slice(0, 900), rest = i > 0 ? [r.pages[0].slice(i)].concat(r.pages.slice(1)) : r.pages.slice(1);
-      try { await M.image(c.sock, c.jid, [img], cap, [], c.msg); return sendPages(c, rest); } catch (e) {}
-    }
-  }
-  return sendPages(c, r.pages);
-}, 'Show the command menu', { usage: 'menu [section]' });
 reg.add('help', 'GENERAL', c => {
   const platform = c.platform || 'whatsapp';
   if (!c.args[0]) return c.reply(MENU.helpFor('menu', platform) + '\n\nSections: ' + MENU.sections(platform, false).map(s => s.key).join(', ') + '\nTry ' + MENU.note('menu', platform) + ' <section>');
